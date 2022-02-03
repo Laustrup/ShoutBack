@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 public class UserController extends Controller {
@@ -24,6 +26,11 @@ public class UserController extends Controller {
     @GetMapping("/user/:{id}")
     public ResponseEntity<User> getUser(@PathVariable(name="id") Long id) {
         return new ResponseEntity<>(userRepo.findById(id).get(), HttpStatus.OK);
+    }
+    @GetMapping("/allow_login/:{username}/:{password}")
+    public ResponseEntity<Boolean> allowLogin(@PathVariable(name = "username") String username,
+                                                     @PathVariable(name = "password") String password) {
+        return new ResponseEntity<>(userService.doesPasswordExist(username,password),HttpStatus.ACCEPTED);
     }
 
     @PutMapping(value = "/create_user", consumes = "application/json")

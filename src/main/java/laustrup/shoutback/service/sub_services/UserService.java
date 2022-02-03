@@ -6,6 +6,8 @@ import laustrup.shoutback.repositories.PostRepository;
 import laustrup.shoutback.repositories.UserRepository;
 import laustrup.shoutback.service.Service;
 
+import java.util.List;
+
 @org.springframework.stereotype.Service
 public class UserService extends Service {
 
@@ -22,5 +24,9 @@ public class UserService extends Service {
             return user;
         }
         return null;
+    }
+    public boolean doesPasswordExist(String username,String password) {
+        User user = userRepo.findByUsername(username);
+        return user.getPassword().equals(password);
     }
 }
