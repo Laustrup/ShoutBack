@@ -27,14 +27,10 @@ public class UserController extends Controller {
     public ResponseEntity<User> getUser(@PathVariable(name="id") Long id) {
         return new ResponseEntity<>(userRepo.findById(id).get(), HttpStatus.OK);
     }
-    @GetMapping("/allow_login/:{username}/:{password}")
-    public ResponseEntity<Boolean> allowLogin(@PathVariable(name = "username") String username,
-                                                     @PathVariable(name = "password") String password) {
-        return new ResponseEntity<>(userService.doesPasswordExist(username,password),HttpStatus.ACCEPTED);
-    }
 
     @PostMapping(value = "/user", consumes = "application/json")
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        System.out.println(user.getUsername());
         return new ResponseEntity<>(userService.createUser(user),HttpStatus.CREATED);
     }
 

@@ -3,6 +3,8 @@ package laustrup.shoutback.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import laustrup.shoutback.models.enums.Gender;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 @Data
+@Getter
+@Setter
 public class User {
 
     @Id @Column(name = "id", nullable = false)

@@ -25,8 +25,4 @@ public class UserService extends Service {
         }
         return null;
     }
-    public boolean doesPasswordExist(String username,String password) {
-        User user = userRepo.findByUsername(username);
-        return user.getPassword().equals(password);
-    }
 }
