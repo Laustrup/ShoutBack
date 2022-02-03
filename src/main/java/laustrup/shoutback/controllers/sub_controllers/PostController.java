@@ -27,12 +27,17 @@ public class PostController extends Controller {
     public ResponseEntity<List<Post>> getPosts() {
         return new ResponseEntity<>(postRepo.findAll(), HttpStatus.OK);
     }
+    @GetMapping("/post/:{id}")
+    public ResponseEntity<Post> getPost(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(postRepo.findById(id).get(), HttpStatus.OK);
+    }
 
-    @PutMapping(value = "/create_post", consumes = "application/json")
+    @PostMapping(value = "/post", consumes = "application/json")
     public ResponseEntity<Post> createPost(@RequestBody Post post) {
         return new ResponseEntity<>(postService.createPost(post),HttpStatus.CREATED);
     }
-    @PutMapping(value = "/edit_post", consumes = "application/json")
+
+    @PutMapping(value = "/post", consumes = "application/json")
     public ResponseEntity<Post> editPost(@RequestBody Post post) {
         return new ResponseEntity<>(postRepo.save(post),HttpStatus.OK);
     }

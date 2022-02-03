@@ -21,16 +21,16 @@ public class CommentController extends Controller {
         commentService = new CommentService(userRepo, postRepo, commentRepo);
     }
 
-    @PutMapping(value = "/create_comment", consumes = "application/json")
+    @PostMapping(value = "/comment", consumes = "application/json")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         return new ResponseEntity<>(commentRepo.save(comment), HttpStatus.CREATED);
     }
-    @PutMapping(value = "/edit_comment", consumes = "application/json")
+    @PutMapping(value = "/comment", consumes = "application/json")
     public ResponseEntity<Comment> editComment(@RequestBody Comment comment) {
         return new ResponseEntity<>(commentRepo.save(comment), HttpStatus.OK);
     }
 
-    @DeleteMapping("/comment/:{id}")
+    @DeleteMapping("/delete_comment/:{id}")
     public ResponseEntity<Comment> deleteComment(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(commentService.deleteComment(id),HttpStatus.OK);
     }

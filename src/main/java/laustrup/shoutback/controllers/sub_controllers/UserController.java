@@ -33,12 +33,12 @@ public class UserController extends Controller {
         return new ResponseEntity<>(userService.doesPasswordExist(username,password),HttpStatus.ACCEPTED);
     }
 
-    @PutMapping(value = "/create_user", consumes = "application/json")
+    @PostMapping(value = "/user", consumes = "application/json")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user),HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/user/:{id}")
+    @DeleteMapping("/delete_user/:{id}")
     public ResponseEntity<User> deleteUser(@PathVariable(name="id") Long id) {
         return new ResponseEntity<>(userService.deleteUser(id),HttpStatus.OK);
     }
