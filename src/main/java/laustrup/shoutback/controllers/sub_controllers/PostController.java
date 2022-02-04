@@ -32,9 +32,9 @@ public class PostController extends Controller {
         return new ResponseEntity<>(postRepo.findById(id).get(), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/post", consumes = "application/json")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        return new ResponseEntity<>(postService.createPost(post),HttpStatus.CREATED);
+    @PostMapping(value = "/post/:{author_id}", consumes = "application/json")
+    public ResponseEntity<Post> createPost(@PathVariable(name = "auth_id") Long authorId, @RequestBody Post post) {
+        return new ResponseEntity<>(postService.createPost(post,authorId),HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/post", consumes = "application/json")

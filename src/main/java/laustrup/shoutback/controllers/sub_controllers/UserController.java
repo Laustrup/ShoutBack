@@ -30,7 +30,6 @@ public class UserController extends Controller {
 
     @PostMapping(value = "/user", consumes = "application/json")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        System.out.println(user.getUsername());
         return new ResponseEntity<>(userService.createUser(user),HttpStatus.CREATED);
     }
 

@@ -1,10 +1,8 @@
 package laustrup.shoutback.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import laustrup.shoutback.models.enums.Gender;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,9 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-@Data
-@Getter
-@Setter
 public class User {
 
     @Id @Column(name = "id", nullable = false)
@@ -28,10 +23,12 @@ public class User {
     @Enumerated(EnumType.ORDINAL) @Column private Gender gender;
 
     @JsonBackReference
+    @JsonIgnoreProperties
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private List<Post> posts;
 
     @JsonBackReference
+    @JsonIgnoreProperties
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private List<Comment> comments;
 
@@ -46,4 +43,26 @@ public class User {
         posts = new ArrayList<>();
     }
 
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
+
+    public String getUsername() {return username;}
+    public void setUsername(String username) {this.username = username;}
+
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}
+
+    public String getDescription() {return description;}
+    public void setDescription(String description) {this.description = description;}
+
+    public Gender getGender() {return gender;}
+    public void setGender(Gender gender) {this.gender = gender;}
+
+    public List<Post> getPosts() {return posts;}
+    public void addPost(Post post) {posts.add(post);}
+    public void setPosts(List<Post> posts) {this.posts = posts;}
+
+    public List<Comment> getComments() {return comments;}
+    public void addComment(Comment comment) {comments.add(comment);}
+    public void setComments(List<Comment> comments) {this.comments = comments;}
 }

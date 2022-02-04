@@ -1,6 +1,7 @@
 package laustrup.shoutback.service.sub_services;
 
 import laustrup.shoutback.models.Post;
+import laustrup.shoutback.models.User;
 import laustrup.shoutback.repositories.CommentRepository;
 import laustrup.shoutback.repositories.PostRepository;
 import laustrup.shoutback.repositories.UserRepository;
@@ -14,7 +15,12 @@ public class PostService extends Service {
     }
 
     // Methods created for acting and returning entities
-    public Post createPost(Post post) {return postRepo.save(post);}
+    public Post createPost(Post post,Long authorId) {
+        User author = userRepo.getById(authorId);
+        author.addPost(post);
+        userRepo.save(author);
+        return postRepo.save(post);
+    }
     public Post deletePost(Long id) {
         if (postRepo.existsById(id)) {
             Post post = postRepo.findById(id).get();

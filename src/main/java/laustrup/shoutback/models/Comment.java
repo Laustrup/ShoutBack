@@ -10,9 +10,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "comment")
-@Data
-@Getter
-@Setter
 public class Comment {
 
     @Id @Column(name = "id", nullable = false)
@@ -36,5 +33,17 @@ public class Comment {
 
         date = LocalDate.now();
     }
+
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id=id;}
+
+    public User getAuthor() {return author;}
+    public void setAuthor(User author) {this.author=author;}
+
+    public String getContent() {return content;}
+    public void setContent(String content) {this.content=content;}
+
+    public LocalDate getDate() {return date;}
+    public void setDate(LocalDate date) {this.date=date;}
 
 }
